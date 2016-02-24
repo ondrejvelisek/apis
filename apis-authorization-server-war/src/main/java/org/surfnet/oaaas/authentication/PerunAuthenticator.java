@@ -19,6 +19,7 @@
 package org.surfnet.oaaas.authentication;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.openjpa.util.UnsupportedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.surfnet.oaaas.auth.AbstractAuthenticator;
@@ -57,7 +58,11 @@ public class PerunAuthenticator extends AbstractAuthenticator {
   public void authenticate(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
       String authStateValue, String returnUri) throws IOException, ServletException {
     setAuthStateValue(request, authStateValue);
-    setPrincipal(request, setupPrincipal(request));
+    AuthenticatedPrincipal principal = setupPrincipal(request);
+    if (true) {
+      throw new UnsupportedOperationException("ext source login: "+principal.getName());
+    }
+    setPrincipal(request, principal);
     chain.doFilter(request, response);
   }
 
@@ -185,10 +190,6 @@ public class PerunAuthenticator extends AbstractAuthenticator {
     // Check if any of authentication system returns extLogin and extSourceName
     if (extLogin == null || extLogin.isEmpty() || extSourceName == null || extSourceName.isEmpty()) {
       throw new IllegalStateException("extLogin or extSourceName is empty. extlogin: \""+extLogin+"\"");
-    }
-
-    if (!StringUtils.isNotBlank(extLogin)) {
-      throw new IllegalStateException("extLogin is empty: \""+extLogin+"\"");
     }
 
     AuthenticatedPrincipal principal = new AuthenticatedPrincipal(extLogin);

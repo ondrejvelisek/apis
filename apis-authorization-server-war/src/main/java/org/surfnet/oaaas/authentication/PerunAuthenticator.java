@@ -48,8 +48,6 @@ public class PerunAuthenticator extends AbstractAuthenticator {
 
   private final static Logger log = LoggerFactory.getLogger(PerunAuthenticator.class);
 
-  private static final String SESSION_IDENTIFIER = "AUTHENTICATED_PRINCIPAL";
-
   @Override
   public boolean canCommence(HttpServletRequest request) {
     return getAuthStateValue(request) != null;
@@ -58,34 +56,12 @@ public class PerunAuthenticator extends AbstractAuthenticator {
   @Override
   public void authenticate(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
       String authStateValue, String returnUri) throws IOException, ServletException {
-    HttpSession session = request.getSession(false);
     setAuthStateValue(request, authStateValue);
-    AuthenticatedPrincipal principal = (AuthenticatedPrincipal) (session != null ? session
-        .getAttribute(SESSION_IDENTIFIER) : null);
-    if (principal != null) {
-      // we stil have the session
-      setPrincipal(request, principal);
-      chain.doFilter(request, response);
-    } else {
-      processInitial(request, response, returnUri, authStateValue);
-      chain.doFilter(request, response);
-    }
+    setPrincipal(request, setupPrincipal(request));
+    chain.doFilter(request, response);
   }
 
-  private void processInitial(HttpServletRequest request, ServletResponse response, String returnUri,
-                              String authStateValue) throws IOException, ServletException {
-
-    AuthenticatedPrincipal principal = setupPrincipal(request);
-
-    // TODO - parse attributes from request and put it into principal
-
-    request.getSession().setAttribute(SESSION_IDENTIFIER, principal);
-    setPrincipal(request, principal);
-  }
-
-
-
-  protected AuthenticatedPrincipal setupPrincipal(HttpServletRequest req) {
+  private AuthenticatedPrincipal setupPrincipal(HttpServletRequest req) {
     String extSourceLoaString = null;
     String extLogin = null;
     String extSourceName = null;

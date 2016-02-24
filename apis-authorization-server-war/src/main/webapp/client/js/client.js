@@ -81,7 +81,7 @@ var windowController = {
   oauth: new OAuth({
     context:window,
     redirectUri: window.location, // Current location as redirect URI: after authorization we get back control.
-    authorizationEndpoint:"../oauth2/authorize",
+    authorizationEndpoint:"../krb/oauth2/authorize",
     clientId:"authorization-server-admin-js-client",
     scope:"read,write"
   }),

@@ -10,7 +10,7 @@
   <name>API Secure - authorization server webapp</name>
 
   <properties>
-    <servlet.port>8080</servlet.port>
+    <servlet.port>8090</servlet.port>
     <mujina-idp.version>3.1.0</mujina-idp.version>
   </properties>
 

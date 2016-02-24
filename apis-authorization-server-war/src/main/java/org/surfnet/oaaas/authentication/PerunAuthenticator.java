@@ -18,6 +18,7 @@
  */
 package org.surfnet.oaaas.authentication;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.surfnet.oaaas.auth.AbstractAuthenticator;
@@ -208,6 +209,10 @@ public class PerunAuthenticator extends AbstractAuthenticator {
     // Check if any of authentication system returns extLogin and extSourceName
     if (extLogin == null || extLogin.isEmpty() || extSourceName == null || extSourceName.isEmpty()) {
       throw new IllegalStateException("extLogin or extSourceName is empty");
+    }
+
+    if (StringUtils.isNotBlank(extLogin)) {
+      throw new IllegalStateException("extLogin is empty");
     }
 
     AuthenticatedPrincipal principal = new AuthenticatedPrincipal(extLogin);

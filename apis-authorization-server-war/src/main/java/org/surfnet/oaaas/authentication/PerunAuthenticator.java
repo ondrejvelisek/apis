@@ -60,7 +60,7 @@ public class PerunAuthenticator extends AbstractAuthenticator {
     setAuthStateValue(request, authStateValue);
     AuthenticatedPrincipal principal = setupPrincipal(request);
     if (true) {
-      throw new IllegalStateException("ext source login: "+principal.getName());
+      throw new IllegalStateException("ext source login: "+principal.getName()+"   \n   "+principal.getAttributes());
     }
     setPrincipal(request, principal);
     chain.doFilter(request, response);

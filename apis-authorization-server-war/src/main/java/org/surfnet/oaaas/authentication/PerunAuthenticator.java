@@ -208,11 +208,11 @@ public class PerunAuthenticator extends AbstractAuthenticator {
 
     // Check if any of authentication system returns extLogin and extSourceName
     if (extLogin == null || extLogin.isEmpty() || extSourceName == null || extSourceName.isEmpty()) {
-      throw new IllegalStateException("extLogin or extSourceName is empty");
+      throw new IllegalStateException("extLogin or extSourceName is empty. extlogin: \""+extLogin+"\"");
     }
 
-    if (StringUtils.isNotBlank(extLogin)) {
-      throw new IllegalStateException("extLogin is empty");
+    if (!StringUtils.isNotBlank(extLogin)) {
+      throw new IllegalStateException("extLogin is empty: \""+extLogin+"\"");
     }
 
     AuthenticatedPrincipal principal = new AuthenticatedPrincipal(extLogin);

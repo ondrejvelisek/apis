@@ -59,9 +59,6 @@ public class PerunAuthenticator extends AbstractAuthenticator {
       String authStateValue, String returnUri) throws IOException, ServletException {
     setAuthStateValue(request, authStateValue);
     AuthenticatedPrincipal principal = setupPrincipal(request);
-    if (true) {
-      throw new IllegalStateException("ext source login: "+principal.getName()+"   \n   "+principal.getAttributes());
-    }
     setPrincipal(request, principal);
     chain.doFilter(request, response);
   }
@@ -185,6 +182,10 @@ public class PerunAuthenticator extends AbstractAuthenticator {
       } catch (NumberFormatException ex) {
         extSourceLoa = 0;
       }
+    }
+
+    if (StringUtils.isBlank(extLogin) || StringUtils.isBlank(extSourceName)) {
+      throw new IllegalStateException("extLogin or extSourceName is empty.");
     }
 
     AuthenticatedPrincipal principal = new AuthenticatedPrincipal(extLogin);

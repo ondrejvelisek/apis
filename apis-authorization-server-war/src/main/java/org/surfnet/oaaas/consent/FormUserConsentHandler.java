@@ -37,7 +37,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -87,7 +89,11 @@ public class FormUserConsentHandler extends AbstractUserConsentHandler {
       request.setAttribute("client", client);
       request.setAttribute(AUTH_STATE, authStateValue);
       request.setAttribute("actionUri", returnUri);
-      request.setAttribute("redirectUri", authorizationRequest.getRedirectUri());
+      URI redirectUri = UriBuilder.fromUri(authorizationRequest.getRedirectUri())
+        .queryParam("error", "access_denied")
+        .queryParam("state", authStateValue)
+        .build();
+      request.setAttribute("redirectUri", redirectUri);
       ((HttpServletResponse) response).setHeader("X-Frame-Options", "SAMEORIGIN");
       request.getRequestDispatcher(getUserConsentUrl()).forward(request, response);
     }

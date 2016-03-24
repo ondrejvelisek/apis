@@ -62,8 +62,8 @@
               <button id="user_oauth_approval" name="user_oauth_approval" value="true" type="submit"
                       class="btn btn-success btn-lg btn-block">Grant permission</button>
               <div class="or">or</div>
-              <a href="${redirectUri}"
-                      class="btn btn-danger btn-lg btn-block">Deny permission</a>
+              <button type="submit" name="user_oauth_approval" value="false"
+                      class="btn btn-danger btn-lg btn-block">Deny permission</button>
             </div>
           </fieldset>
         </form>

@@ -49,7 +49,7 @@ import java.util.List;
 @Named("formConsentHandler")
 public class FormUserConsentHandler extends AbstractUserConsentHandler {
 
-  private static final String USER_OAUTH_APPROVAL = "user_oauth_approval";
+  protected static final String USER_OAUTH_APPROVAL = "user_oauth_approval";
 
   @Inject
   private AccessTokenRepository accessTokenRepository;
@@ -89,11 +89,6 @@ public class FormUserConsentHandler extends AbstractUserConsentHandler {
       request.setAttribute("client", client);
       request.setAttribute(AUTH_STATE, authStateValue);
       request.setAttribute("actionUri", returnUri);
-      URI redirectUri = UriBuilder.fromUri(authorizationRequest.getRedirectUri())
-        .queryParam("error", "access_denied")
-        .queryParam("state", authStateValue)
-        .build();
-      request.setAttribute("redirectUri", redirectUri);
       ((HttpServletResponse) response).setHeader("X-Frame-Options", "SAMEORIGIN");
       request.getRequestDispatcher(getUserConsentUrl()).forward(request, response);
     }
@@ -111,7 +106,7 @@ public class FormUserConsentHandler extends AbstractUserConsentHandler {
     return "/WEB-INF/jsp/userconsent.jsp";
   }
 
-  private boolean processForm(final HttpServletRequest request, final HttpServletResponse response)
+  protected boolean processForm(final HttpServletRequest request, final HttpServletResponse response)
       throws ServletException, IOException {
     if (Boolean.valueOf(request.getParameter(USER_OAUTH_APPROVAL))) {
       setAuthStateValue(request, request.getParameter(AUTH_STATE));

@@ -87,6 +87,7 @@ public class FormUserConsentHandler extends AbstractUserConsentHandler {
       request.setAttribute("client", client);
       request.setAttribute(AUTH_STATE, authStateValue);
       request.setAttribute("actionUri", returnUri);
+      request.setAttribute("redirectUri", authorizationRequest.getRedirectUri());
       ((HttpServletResponse) response).setHeader("X-Frame-Options", "SAMEORIGIN");
       request.getRequestDispatcher(getUserConsentUrl()).forward(request, response);
     }

@@ -195,6 +195,8 @@ public class PerunAuthenticator extends AbstractAuthenticator {
     additionalInformations.put("extSourceLoa", String.valueOf(extSourceLoa));
     principal.setAttributes(additionalInformations);
 
+    principal.setAdminPrincipal(true);
+
     return principal;
   }
 

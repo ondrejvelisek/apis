@@ -55,7 +55,28 @@ h1 {
 
 .consent img {
     margin-right: 20px;
+    max-width: 100px;
+    max-height: 100px;
 }
+.consent img:last-child {
+    margin-right: 0px;
+}
+.consent img.arrow {
+    max-width: 32px;
+    max-height: 32px;
+}
+
+@media (min-width: 768px) {
+    .consent img {
+        max-width: 128px;
+        max-height: 128px;
+    }
+    .consent img.arrow {
+        max-width: 64px;
+        max-height: 64px;
+    }
+}
+
 
 .or {
     display: table;

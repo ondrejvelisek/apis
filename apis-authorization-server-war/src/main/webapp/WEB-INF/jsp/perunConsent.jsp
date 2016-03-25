@@ -23,7 +23,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 
 
         <div class="page-header">
@@ -33,7 +33,7 @@
 
         <div class="consent">
           <img alt="${client.name}" title="${client.name}" src="${client.thumbNailUrl}" />
-          <img src="${pageContext.request.contextPath}/client/img/arrow.png" />
+          <img class="arrow" src="${pageContext.request.contextPath}/client/img/arrow.png" />
           <img alt="${client.resourceServer.name}"
             title="${client.resourceServer.name}"
             src="${client.resourceServer.thumbNailUrl}" />
@@ -42,21 +42,26 @@
         <form id="accept" method="post" action="${pageContext.request.contextPath}${actionUri}">
           <input type="hidden" name="AUTH_STATE" value="${AUTH_STATE}"/>
 
-          <h2>This data will be shared</h2>
+          <c:if test="${not empty myObject.featuresList}">
 
-          <fieldset>
-            <c:forEach items="${client.scopes}" var="availableScope">
-              <c:set var="checked" value="" />
-              <c:forEach var="requestedScope" items="${requestedScopes}">
-                <c:if test="${requestedScope eq availableScope}">
-                  <c:set var="checked" value="CHECKED" />
-                </c:if>
+            <h2>This data will be shared</h2>
+
+            <fieldset>
+              <c:forEach items="${client.scopes}" var="availableScope">
+                <c:set var="checked" value="" />
+                <c:forEach var="requestedScope" items="${requestedScopes}">
+                  <c:if test="${requestedScope eq availableScope}">
+                    <c:set var="checked" value="CHECKED" />
+                  </c:if>
+                </c:forEach>
+                <input type="checkbox" id="GRANTED_SCOPES" name="GRANTED_SCOPES" <c:out value="${checked}"/>
+                       value="${availableScope}"/>
+                <span class="consent-label">${availableScope}</span><br/>
               </c:forEach>
-              <input type="checkbox" id="GRANTED_SCOPES" name="GRANTED_SCOPES" <c:out value="${checked}"/>
-                     value="${availableScope}"/>
-              <span class="consent-label">${availableScope}</span><br/>
-            </c:forEach>
-          </fieldset>
+            </fieldset>
+
+          </c:if>
+
           <fieldset>
             <div class="form-actions">
               <button id="user_oauth_approval" name="user_oauth_approval" value="true" type="submit"

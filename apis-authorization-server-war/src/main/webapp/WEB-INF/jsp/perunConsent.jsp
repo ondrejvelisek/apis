@@ -27,8 +27,9 @@
 
 
         <div class="page-header">
-          <h1><strong>${client.name}</strong> wants to retrieve data
-            from <strong>${client.resourceServer.name}</strong></h1>
+          <h1><strong>${client.name}</strong>
+            request permission to access service
+            <strong>${client.resourceServer.name}</strong></h1>
         </div>
 
         <div class="consent">
@@ -42,7 +43,7 @@
         <form id="accept" method="post" action="${pageContext.request.contextPath}${actionUri}">
           <input type="hidden" name="AUTH_STATE" value="${AUTH_STATE}"/>
 
-          <c:if test="${not empty myObject.featuresList}">
+          <c:if test="${not empty client.scopes}">
 
             <h2>This data will be shared</h2>
 

@@ -25,10 +25,9 @@
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 
-
         <div class="page-header">
           <h1><strong>${client.name}</strong>
-            request permission to access service
+            asks for permission to access service
             <strong>${client.resourceServer.name}</strong></h1>
         </div>
 

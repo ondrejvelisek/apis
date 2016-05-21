@@ -1,10 +1,11 @@
-package org.surfnet.oaaas.consent;
+package cz.metacentrum.perun.oauth;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpMethod;
 import org.surfnet.oaaas.auth.AbstractAuthenticator;
 import org.surfnet.oaaas.auth.principal.AuthenticatedPrincipal;
+import org.surfnet.oaaas.consent.FormUserConsentHandler;
 import org.surfnet.oaaas.model.AccessToken;
 import org.surfnet.oaaas.model.AuthorizationRequest;
 import org.surfnet.oaaas.model.Client;

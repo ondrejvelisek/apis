@@ -16,10 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.surfnet.oaaas.authentication;
+package cz.metacentrum.perun.oauth;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.openjpa.util.UnsupportedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.surfnet.oaaas.auth.AbstractAuthenticator;
@@ -28,10 +27,8 @@ import org.surfnet.oaaas.auth.principal.AuthenticatedPrincipal;
 import javax.inject.Named;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.cert.CertificateParsingException;

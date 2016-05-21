@@ -1,4 +1,4 @@
-package org.surfnet.oaaas.authentication;
+package cz.metacentrum.perun.oauth;
 
 /**
  * @author Michal Prochazka <michalp@ics.muni.cz>
